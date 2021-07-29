@@ -1,13 +1,15 @@
 # ravenfield-player-voice
 A mutator mod that gives the player voice reactions in Ravenfield.
 
-Documentation for PlayerVoice v1.3
+Documentation for PlayerVoice v1.5
 
 How to use:
+- Download the package and import it into your Tools Pack project.
 - All you have to do is put your sound files in the appropriate sound bank on the template prefab. You can leave a sound bank empty, no problem.
 - Do note, Light Damage reactions are currently unused in this version of the script. You're free to change the script if you want though.
 - If you encounter any bugs or problems with making a mutator, feel free to reach out to me. I'll do my best to assist you.
 
+If you use this script and template, I'd greatly appreciate the credit. Use this url to link to my workshop page: https://steamcommunity.com/profiles/76561198065486336/myworkshopfiles/?appid=636480
 
 Some Notes on Certain Reaction Types:
 - Damage Reactions

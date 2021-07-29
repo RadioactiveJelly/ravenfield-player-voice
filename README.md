@@ -8,6 +8,8 @@ How to use:
 - Do note, Light Damage reactions are currently unused in this version of the script. You're free to change the script if you want though.
 - If you encounter any bugs or problems with making a mutator, feel free to reach out to me. I'll do my best to assist you.
 
+
+-Some Notes on Certain Reaction Types
 - Damage Reactions
 	- Has sound banks for medium and heavy damage.
 	- Medium damage will override light damage below certain HP thresholds.

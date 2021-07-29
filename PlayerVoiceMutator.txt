@@ -5,6 +5,7 @@ behaviour("PlayerVoiceMutator")
 --Thanks Sudo for implementing the Ammo/Medic bag reactions
 
 function PlayerVoiceMutator:Awake()
+	self.scriptVersion = 1.5 -- DO NOT CHANGE THIS
 	self.gameObject.name = "PlayerVoice" --DO NOT CHANGE THIS. DOING SO WILL BREAK COMPATIBILITY WITH THE QUICK THROW MUTATOR.
 end
 
@@ -152,7 +153,7 @@ function PlayerVoiceMutator:Start()
 	self.knockDownTimer = 0
 	self.killTimer = 0
 
-	print("<color=aqua>[Player Voice] Initialized v1.3</color>")
+	print("<color=aqua>[Player Voice] Initialized Player Voice v" .. self.scriptVersion .. "</color>")
 end
 
 function PlayerVoiceMutator:resetBooleans()

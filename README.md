@@ -4,7 +4,7 @@ A mutator mod that gives the player voice reactions in Ravenfield.
 Documentation for PlayerVoice v1.3
 
 How to use:
-- All you have to do is put your sound files in the appropriate sound bank. You can leave a sound bank empty, no problem.
+- All you have to do is put your sound files in the appropriate sound bank on the template prefab. You can leave a sound bank empty, no problem.
 - Do note, Light Damage reactions are currently unused in this version of the script. You're free to change the script if you want though.
 - If you encounter any bugs or problems with making a mutator, feel free to reach out to me. I'll do my best to assist you.
 

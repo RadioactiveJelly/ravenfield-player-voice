@@ -40,6 +40,7 @@ function PlayerVoiceMutator:Start()
 	self.DoStunGrenadeReactions = self.script.mutator.GetConfigurationBool("DoStunGrenadeReactions") and #self.targets.StunGrenadeSoundBank.clips > 0
 	self.DoAmmoBagReactions = self.script.mutator.GetConfigurationBool("DoAmmoBagReactions") and #self.targets.AmmoBagSoundBank.clips > 0
 	self.DoMedicBagReactions = self.script.mutator.GetConfigurationBool("DoMedicBagReactions") and #self.targets.MedicBagSoundBank.clips > 0
+	self.DoC4Reactions = self.script.mutator.GetConfigurationBool("DoC4Reactions") and #self.targets.C4SoundBank.clips > 0
 
 	self.TimeBetweenKillReactions = self.script.mutator.GetConfigurationFloat("TimeBetweenKillReactions")
 
@@ -141,6 +142,18 @@ function PlayerVoiceMutator:Start()
 			print("<color=green>[Player Voice] Added to medic white list: " .. word .. "</color>")
 			self.medicWhiteList[medicWhiteListCount] = word
 			medicWhiteListCount = medicWhiteListCount + 1
+		end
+	end
+
+	--Parse string for C4s.
+	if(self.DoC4Reactions) then
+		local c4WhiteListString = self.script.mutator.GetConfigurationString("C4s")
+		self.c4WhiteList = {}
+		local c4WhiteListCount = 1
+		for word in string.gmatch(c4WhiteListString, '([^,]+)') do
+			print("<color=green>[Player Voice] Added to C4 white list: " .. word .. "</color>")
+			self.c4WhiteList[c4WhiteListCount] = word
+			c4WhiteListCount = c4WhiteListCount + 1
 		end
 	end
 
@@ -402,6 +415,14 @@ function PlayerVoiceMutator:onThrow(entry)
 			for y=1, #self.medicWhiteList, 1 do
 				if(entry.name == self.medicWhiteList[y]) then
 					self.targets.MedicBagSoundBank.PlayRandom()
+					return
+				end
+			end
+		end
+		if self.DoC4Reactions then
+			for y=1, #self.c4WhiteList, 1 do
+				if(entry.name == self.c4WhiteList[y]) then
+					self.targets.C4SoundBank.PlayRandom()
 					return
 				end
 			end

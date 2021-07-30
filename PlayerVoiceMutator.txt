@@ -2,10 +2,11 @@
 behaviour("PlayerVoiceMutator")
 
 --Player voice script by RadioactiveJellyfish. You're free to edit this if you need to, things that shouldn't be changed are marked. If you use this script for anything, I'd appreciate the credit.
---Thanks Sudo for implementing the Ammo/Medic bag reactions
+--Contributors: SudoName for Ammo/Medic Bag and C4 reactions.
 
 function PlayerVoiceMutator:Awake()
-	self.scriptVersion = 1.5 -- DO NOT CHANGE THIS
+	self.scriptVersion = 1.6 -- DO NOT CHANGE THIS
+	self.fixVersion = 0 -- DO NOT CHANGE THIS
 	self.gameObject.name = "PlayerVoice" --DO NOT CHANGE THIS. DOING SO WILL BREAK COMPATIBILITY WITH THE QUICK THROW MUTATOR.
 end
 
@@ -166,7 +167,7 @@ function PlayerVoiceMutator:Start()
 	self.knockDownTimer = 0
 	self.killTimer = 0
 
-	print("<color=aqua>[Player Voice] Initialized Player Voice v" .. self.scriptVersion .. "</color>")
+	print("<color=aqua>[Player Voice] Initialized Player Voice v" .. self.scriptVersion .. "." .. self.fixVersion .. "</color>")
 end
 
 function PlayerVoiceMutator:resetBooleans()

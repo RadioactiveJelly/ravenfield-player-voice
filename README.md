@@ -14,7 +14,7 @@ A mutator mod that gives the player voice reactions in Ravenfield.
 - If it's a patch or bug fix (when the third number in the version goes up) all you'll have to do is update your script accordingly.
 - If it's a feature update (when the second number goes up) you'll need to get the new script **and** the new template version.
 - Same applies for major updates.
-- Unfortunately, there isn't really a way for me to streamline the update process for you guys at the moment. I'll definitely look into it when RF moves to 2020.
+- Unfortunately, there isn't really a way for me to streamline the update process for you guys at the moment. I'll definitely look into it when RF moves to Unity 2020.
 
 If you use this script and template, I'd greatly appreciate the credit. Use this url to link to my workshop page: https://steamcommunity.com/profiles/76561198065486336/myworkshopfiles/?appid=636480
 

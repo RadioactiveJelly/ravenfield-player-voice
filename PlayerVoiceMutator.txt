@@ -6,7 +6,7 @@ behaviour("PlayerVoiceMutator")
 
 function PlayerVoiceMutator:Awake()
 	self.scriptVersion = 1.6 -- DO NOT CHANGE THIS
-	self.fixVersion = 0 -- DO NOT CHANGE THIS
+	self.fixVersion = 2 -- DO NOT CHANGE THIS
 	self.gameObject.name = "PlayerVoice" --DO NOT CHANGE THIS. DOING SO WILL BREAK COMPATIBILITY WITH THE QUICK THROW MUTATOR.
 end
 
@@ -167,6 +167,8 @@ function PlayerVoiceMutator:Start()
 	self.knockDownTimer = 0
 	self.killTimer = 0
 
+	self.script.StartCoroutine(self:FindLoadoutChanger())
+
 	print("<color=aqua>[Player Voice] Initialized Player Voice v" .. self.scriptVersion .. "." .. self.fixVersion .. "</color>")
 end
 
@@ -190,13 +192,13 @@ function PlayerVoiceMutator:Update()
 	end
 
 	if not self.firstSpawn then
-		if SpawnUi.isOpen and not self.isSpawnUiOpen then
+		--[[if SpawnUi.isOpen and not self.isSpawnUiOpen then
 			self.isSpawnUiOpen = true
 		elseif not SpawnUi.isOpen and self.isSpawnUiOpen then
 			self.isSpawnUiOpen = false
 			print("<color=yellow>[Player Voice] Finding grenades.</color>")
 			self:FindGrenades()
-		end
+		end]]--
 		
 		if self.DoReloadingVoices and Player.actor.activeWeapon 
 		and Player.actor.activeWeapon.isReloading and self.doneReloading and not Player.actor.isSeated then
@@ -240,7 +242,7 @@ function PlayerVoiceMutator:FixedUpdate()
 		self.targets.AudioSource.Stop()
 		self.targets.FallingSoundBank.PlayRandom()
 		self.isPLayingFallingSound = true
-	elseif (Player.actor.velocity.y == 0 or Player.actor.isParachuteDeployed or Player.actor.isSwimming) and self.isFalling then
+	elseif (Player.actor.velocity.y == 0 or Player.actor.isParachuteDeployed or Player.actor.isSwimming or not Player.actor.isFallenOver) and self.isFalling then
 		if Player.actor.isParachuteDeployed or Player.actor.isSwimming then
 			self.targets.AudioSource.Stop()
 			self.targets.AudioSource.Play()
@@ -462,4 +464,31 @@ function PlayerVoiceMutator:FindGrenades()
 	for i, weapon in ipairs(self.weapons) do
 		self:CheckForGrenadeTag(weapon)
 	end
+end
+
+function PlayerVoiceMutator:FindLoadoutChanger()
+	return function()
+		coroutine.yield(WaitForSeconds(0.15))
+		local loadOutChangerObj = self.gameObject.Find("LoadoutChangeScript(Clone)")
+		if loadOutChangerObj then
+			self.loadoutChanger = loadOutChangerObj.GetComponent(ScriptedBehaviour)
+			self.loadoutChanger.self.button.GetComponent(Button).onClick.AddListener(self,"onOverlayClicked")
+			print("<color=aqua>[Player Voice] Loadout Changer mutator found.</color>")
+		else
+			print("<color=red>[Player Voice] Loadout Changer mutator not found.</color>")
+		end
+	end
+end
+
+function PlayerVoiceMutator:onOverlayClicked()
+	if not Player.actor.isDead then
+		self.script.StartCoroutine(self:onLoadOutChanged())
+	end
+end
+
+function PlayerVoiceMutator:onLoadOutChanged()
+	return function()
+        coroutine.yield(WaitForSeconds(0.1))
+		self:FindGrenades()
+    end
 end

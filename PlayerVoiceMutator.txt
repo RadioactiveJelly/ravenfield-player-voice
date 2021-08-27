@@ -431,8 +431,8 @@ function PlayerVoiceMutator:onThrow(entry)
 			end
 		end
 		if self.DoGrenadeReactions then
-			for y=0, #entry.tags, 1 do
-				if(entry.tags[y] == "GRENADES" or entry.tags[y]== "Grenades") then
+			for y=1, #entry.tags, 1 do
+				if(string.lower(entry.tags[y]) == "grenades") then
 					self.targets.ThrowGrenadeBank.PlayRandom()
 					return
 				end
@@ -449,7 +449,7 @@ function PlayerVoiceMutator:CheckForGrenadeTag(weapon)
 	local grenadeCount = 0
 	if(weapon.gameObject.name == "THUMPER") then return end
 	for y, tag in ipairs(weapon.weaponEntry.tags) do
-		if(tag == "GRENADES" or tag == "Grenades" or tag == "EQUIPMENT" or tag == "Equipment") then
+		if(string.lower(tag) == "grenades" or string.lower(tag) == "equipment") then
 			self.grenades[grenadeCount] = weapon
 			self.grenades[grenadeCount].onFire.AddListener(self,"onFire", self.grenades[grenadeCount].weaponEntry)
 			grenadeCount = grenadeCount + 1

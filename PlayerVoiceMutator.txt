@@ -268,6 +268,11 @@ end
 
 function PlayerVoiceMutator:onTakeDamage(actor,source,info)
 	--Track last actor who did damage to player for revenge kills.
+
+	if(CurrentEvent.isConsumed) then
+		return
+	end
+
 	if source then
 		if self.DoRevengeKillVoices and source.team ~= Player.actor.team  then
 			self.lastDamageSource = source
